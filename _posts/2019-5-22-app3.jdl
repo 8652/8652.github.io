@@ -1,0 +1,116 @@
+/**
+ * The application configuration.
+ * @author A true hipster
+ */
+application {
+    config {
+        baseName nation,
+        applicationType gateway,
+        packageName com.jhipster.nation,
+        serviceDiscoveryType eureka,
+        authenticationType jwt,
+        prodDatabaseType mysql,
+        cacheProvider ehcache,
+        buildTool maven
+    }
+    entities *
+}
+
+/**
+ * The application configuration.
+ * @author A true hipster
+ */
+application {
+    config {
+        baseName change,
+        applicationType microservice,
+        packageName com.jhipster.change,
+        serviceDiscoveryType eureka,
+        authenticationType jwt,
+        databaseType sql,
+        prodDatabaseType mysql,
+        devDatabaseType mysql,
+        buildTool maven,
+        serverPort 8180,
+        skipUserManagement true
+    }
+    entities ChangeRecord, UserOperation
+}
+
+application {
+    config {
+        baseName support,
+        applicationType microservice,
+        packageName com.jhipster.support,
+        serviceDiscoveryType eureka,
+        authenticationType jwt,
+        databaseType sql,
+        prodDatabaseType mysql,
+        devDatabaseType mysql,
+        buildTool maven,
+        serverPort 8280,
+        skipUserManagement true
+    }
+    entities SupportRecord, UserOperation
+}
+
+/**
+ * The UserOperation entity.
+ * @author A true hipster
+ */
+entity UserOperation {
+    /** fieldName */
+    userId String
+    operId Integer
+    operStatus Integer
+}
+
+/**
+ * The ChangeRecord entity.
+ * @author A trchangeIdr
+ */
+entity ChangeRecord {
+    /** fieldName */
+    changeStatus ChangeStatus
+    changeOption ChangeOption
+    changeReason CHangeReason
+}
+
+enum ChangeStatus {
+    CHILDREN, ADULT
+}
+
+enum ChangeOption {
+    FATHER, MOTHER
+}
+
+//离婚判决书/抚养关系变更公正书/死亡证明材料/收养证明
+enum CHangeReason {
+    MARRIAGE, RAISE, DEATH, ADOPTION
+}
+
+/**
+ * The SupportRecord entity.
+ * @author A true hipster
+ */
+entity SupportRecord {
+    /** fieldName */
+    account String
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    UserOperation to SupportRecord
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    UserOperation to ChangeRecord
+}
+
+dto * with mapstruct
+service * with serviceClass
