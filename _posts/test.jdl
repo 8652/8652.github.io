@@ -1,0 +1,145 @@
+/**
+ * The application configuration.
+ * @author A true hipster
+ */
+application {
+    config {
+        baseName uaa
+        applicationType uaa,
+        packageName com.jhipster.micro,
+        serviceDiscoveryType eureka,
+        authenticationType uaa,
+        databaseType sql,
+        prodDatabaseType mysql,
+        devDatabaseType mysql,
+        cacheProvider ehcache,
+        buildTool maven,
+        serverPort 6180
+    }
+}
+
+/**
+ * The application configuration.
+ * @author A true hipster
+ */
+application {
+    config {
+        baseName gateway,
+        applicationType gateway,
+        packageName com.jhipster.micro,
+        serviceDiscoveryType eureka,
+        authenticationType uaa,
+        databaseType sql,
+        prodDatabaseType mysql,
+        devDatabaseType mysql,
+        cacheProvider ehcache,
+        buildTool maven,
+    }
+    entities *
+}
+
+/**
+ * The application configuration.
+ * @author A true hipster
+ */
+application {
+    config {
+        baseName service1,
+        applicationType microservice,
+        packageName com.jhipster.micro,
+        serviceDiscoveryType eureka,
+        authenticationType uaa,
+        databaseType sql,
+        prodDatabaseType mysql,
+        devDatabaseType mysql,
+        cacheProvider ehcache,
+        buildTool maven,
+        serverPort 6280,
+        skipUserManagement true
+    }
+    entities UserOperation, ChangeRecord
+}
+
+/**
+ * The application configuration.
+ * @author A true hipster
+ */
+application {
+    config {
+        baseName service2,
+        applicationType microservice,
+        packageName com.jhipster.micro,
+        serviceDiscoveryType eureka,
+        authenticationType uaa,
+        databaseType sql,
+        prodDatabaseType mysql,
+        devDatabaseType mysql,
+        cacheProvider ehcache,
+        buildTool maven,
+        serverPort 6380,
+        skipUserManagement true
+    }
+    entities Book, Reader
+}
+
+/**
+ * The UserOperation entity.
+ * @author A true hipster
+ */
+entity UserOperation {
+    /** fieldName */
+    userId String
+    operId Integer
+    operStatus Integer
+}
+
+/**
+ * The ChangeRecord entity.
+ * @author A trchangeIdr
+ */
+entity ChangeRecord {
+    /** fieldName */
+    changeStatus Integer
+    changeOption Integer
+    changeReason String
+}
+
+/**
+ * The UserOperation entity.
+ * @author A true hipster
+ */
+entity Book {
+    /** fieldName */
+    bookId String
+    bookName String
+    bookAuther String
+}
+
+/**
+ * The ChangeRecord entity.
+ * @author A trchangeIdr
+ */
+entity Reader {
+    /** fieldName */
+    name String
+    age Integer
+}
+
+
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    UserOperation to ChangeRecord
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToMany {
+    Reader to Book
+}
+
+dto * with mapstruct
+service * with serviceClass
