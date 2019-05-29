@@ -4,14 +4,18 @@
  */
 application {
     config {
-        baseName nation,
-        applicationType gateway,
-        packageName com.jhipster.nation,
+        baseName nationchange,
+        applicationType microservice,
+        packageName com.jhipster.nationchange,
         serviceDiscoveryType eureka,
         authenticationType jwt,
+        databaseType sql,        
         prodDatabaseType mysql,
+        devDatabaseType mysql,
         cacheProvider ehcache,
-        buildTool maven
+        buildTool maven,
+        serverPort 7180,
+        skipUserManagement true
     }
     entities *
 }
@@ -22,36 +26,17 @@ application {
  */
 application {
     config {
-        baseName change,
-        applicationType microservice,
-        packageName com.jhipster.change,
+        baseName gate,
+        applicationType gateway,
+        packageName com.jhipster.gate,
         serviceDiscoveryType eureka,
         authenticationType jwt,
         databaseType sql,
         prodDatabaseType mysql,
         devDatabaseType mysql,
         buildTool maven,
-        serverPort 8180,
-        skipUserManagement true
     }
-    entities ChangeRecord, UserOperation
-}
-
-application {
-    config {
-        baseName support,
-        applicationType microservice,
-        packageName com.jhipster.support,
-        serviceDiscoveryType eureka,
-        authenticationType jwt,
-        databaseType sql,
-        prodDatabaseType mysql,
-        devDatabaseType mysql,
-        buildTool maven,
-        serverPort 8280,
-        skipUserManagement true
-    }
-    entities SupportRecord, UserOperation
+    entities *
 }
 
 /**
@@ -73,7 +58,7 @@ entity ChangeRecord {
     /** fieldName */
     changeStatus ChangeStatus
     changeOption ChangeOption
-    changeReason CHangeReason
+    changeReason ChangeReason
 }
 
 enum ChangeStatus {
@@ -84,8 +69,8 @@ enum ChangeOption {
     FATHER, MOTHER
 }
 
-//离婚判决书/抚养关系变更公正书/死亡证明材料/收养证明
-enum CHangeReason {
+//离婚判决书 抚养关系变更公正书 死亡证明材料 收养证明
+enum ChangeReason {
     MARRIAGE, RAISE, DEATH, ADOPTION
 }
 
